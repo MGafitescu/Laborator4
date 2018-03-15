@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -35,6 +36,26 @@ public class Catalog implements Serializable {
         out.close();
         file.close();
         System.out.println("Serialization succeded.\n");
+    }
+
+    public void open(String title) throws  IOException
+    {
+     String path = null;
+     for(Document document : documents)
+     {
+         if(document.getTitle().equals(title))
+             path=document.getPath();
+     }
+     if(path!=null) {
+         File file = new File(path);
+         Desktop desktop = Desktop.getDesktop();
+         desktop.open(file);
+         System.out.println("Your file was opened succesfuly.");
+     }
+     else
+     {
+         System.out.println("Document not found in the catalog.\n");
+     }
     }
 
     public static Catalog  load(String filename) throws IncorrectParameterException, IOException, ClassNotFoundException
