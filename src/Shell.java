@@ -41,6 +41,12 @@ public class Shell {
             if(parts[0].contains("load"))
                 catalog.executeCommand(new LoadCommand(),parts);
         else
-            throw new InvalidCommandException("Comanda "+parts[0]+" este invalida" );
+            if(parts[0].contains("play"))
+                catalog.executeCommand(new PlayCommand(),parts);
+            else
+                if (parts[0].contains("report"))
+                    catalog.executeCommand(new ReportCommand(), parts);
+            else
+                throw new InvalidCommandException("Comanda "+parts[0]+" este invalida" );
     }
 }
